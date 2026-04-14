@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>PLANNER DA MINHA ESPOSA</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div id="container-principal"> 
+        <img src="../img/helloKitty1.png" class="sticker hk-fixa-1">
+        <img src="../img/helloKitty2.png" class="sticker hk-fixa-2">
+        <img src="../img/helloKitty4 (1).png" class="sticker hk-fixa-3">  
+
+        <div class="header-weekly">
+            <svg viewBox="0 0 600 150" class="curved-title">
+                <path id="curve" d="M50,120 Q300,30 550,120" fill="transparent"/>
+                <text><textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">WEEKLY PLANNER</textPath></text>
+            </svg>
+        </div>
+
+        <div class="wrapper">
+            <nav id="plannerGrid" class="containerPlanner">
+                <button onclick="resetarPainel()" class="btn-home">🏠 Início</button>
+                <div class="daysWeek">Domingo</div>
+                <div class="daysWeek">Segunda</div>
+                <div class="daysWeek">Terça</div>
+                <div class="daysWeek">Quarta</div>
+                <div class="daysWeek">Quinta</div>
+                <div class="daysWeek">Sexta</div>
+                <div class="daysWeek">Sábado</div>
+            </nav>
+
+            <main id="areaConteudo">
+                <div id="verHorarios">
+                    <div id="conteudo-boas-vindas" class="painel-boas-vindas">
+                        <img src="../img/itadori.png" class="itadori-inicio">
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div> 
+
+    <div id="tela-rotina" style="display: none;">
+        <div class="header-rotina">
+            <button onclick="voltarParaPlanner()" id="btn-voltar">← Voltar</button>
+            <h2 id="hora-selecionada">08:00</h2>
+        </div>
+        <div class="planner-folha">
+            <img src="../img/helloKitty2.png" class="sticker hk-rotina-2">
+            <img src="../img/helloKitty3.png" class="sticker hk-rotina-3">
+            <img src="../img/helloKittyKiraTrue.png" class="sticker hk-rotina-4">
+            <div class="topo-folha">
+                <div class="prioridades-box">
+                    <h3>PRIORIDADES</h3>
+                    <input type="text" id="prio1" placeholder="1.">
+                    <input type="text" id="prio2" placeholder="2.">
+                    <input type="text" id="prio3" placeholder="3.">
+                </div>
+            </div>
+            <div class="corpo-folha">
+                <h3>PARA FAZER</h3>
+                <textarea id="texto-rotina" placeholder="Escreva aqui..."></textarea>
+                <button onclick="salvarDados()" id="btn-salvar">Guardar Rotina 🎀</button>
+            </div>
+        </div>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+</html>
