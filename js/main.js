@@ -3,7 +3,7 @@ const areaExibicao = document.getElementById('verHorarios');
 // Aqui definimos que o Itadori aparece apenas no Início
 const htmlBoasVindas = `
     <div class="painel-boas-vindas">
-        <img src="../img/itadori.png" class="itadori-inicio">
+        <img src="img/itadori.png" class="itadori-inicio">
     </div>
 `;
 
