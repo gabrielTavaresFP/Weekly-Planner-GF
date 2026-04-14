@@ -2,7 +2,10 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLANNER DA MINHA ESPOSA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -17,6 +20,9 @@
                 <text><textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">WEEKLY PLANNER</textPath></text>
             </svg>
         </div>
+
+        <!-- Data da semana (movida mais para a esquerda para não ficar em cima da imagem) -->
+        <div class="week-badge" id="week-badge"></div>
 
         <div class="wrapper">
             <nav id="plannerGrid" class="containerPlanner">
@@ -44,6 +50,9 @@
         <div class="header-rotina">
             <button onclick="voltarParaPlanner()" id="btn-voltar">← Voltar</button>
             <h2 id="hora-selecionada">08:00</h2>
+            
+            <!-- NOVO BOTÃO LIMPAR (exatamente como no código da IA, com mesma estilização) -->
+            <button onclick="confirmarLimpar()" class="btn-limpar">Limpar</button>
         </div>
         <div class="planner-folha">
             <img src="img/helloKitty2.png" class="sticker hk-rotina-2">
@@ -52,9 +61,20 @@
             <div class="topo-folha">
                 <div class="prioridades-box">
                     <h3>PRIORIDADES</h3>
-                    <input type="text" id="prio1" placeholder="1.">
-                    <input type="text" id="prio2" placeholder="2.">
-                    <input type="text" id="prio3" placeholder="3.">
+                    <div class="prio-list">
+                        <div class="prio-item">
+                            <span class="prio-num">1</span>
+                            <input type="text" id="prio1" placeholder="Primeira prioridade...">
+                        </div>
+                        <div class="prio-item">
+                            <span class="prio-num">2</span>
+                            <input type="text" id="prio2" placeholder="Segunda prioridade...">
+                        </div>
+                        <div class="prio-item">
+                            <span class="prio-num">3</span>
+                            <input type="text" id="prio3" placeholder="Terceira prioridade...">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="corpo-folha">
@@ -64,6 +84,25 @@
             </div>
         </div>
     </div>
+
+    <!-- TOAST -->
+    <div id="toast">
+        <span class="toast-icon">🎀</span>
+        <span id="toast-msg">Salvo!</span>
+    </div>
+
+    <!-- MODAL CONFIRMAR LIMPAR (mesma mensagem e estilização da IA) -->
+    <div id="modal-overlay">
+        <div id="modal-box">
+            <h3>Limpar rotina?</h3>
+            <p>Isso vai apagar as prioridades e anotações deste horário.</p>
+            <div class="modal-btns">
+                <button class="btn-modal-cancel" onclick="fecharModal()">Cancelar</button>
+                <button class="btn-modal-confirm" onclick="limparDados()">Limpar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
 </body>
 </html>

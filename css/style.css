@@ -1,41 +1,371 @@
 :root {
-    --fundo-creme: #E2B8AD; --berry-deep: #6D322A; --berry-medium: #87564B;
-    --strawberry-pink: #CFA195; --hk-pink: #F4C7D0; --hk-red: #A13C36;
+    --fundo-creme: #E2B8AD; 
+    --berry-deep: #6D322A; 
+    --berry-medium: #87564B;
+    --strawberry-pink: #CFA195; 
+    --hk-pink: #F4C7D0; 
+    --hk-red: #A13C36;
+    --rose-light: #E8B5A8;   /* cor rosada usada nos números das prioridades */
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background-color: var(--fundo-creme); font-family: sans-serif; overflow-x: hidden; }
-#container-principal { padding: 40px; position: relative; min-height: 100vh; }
-.wrapper { display: flex; gap: 20px; position: relative; z-index: 2; }
-.containerPlanner { width: 200px; display: flex; flex-direction: column; gap: 10px; }
-.daysWeek { background: var(--berry-medium); color: white; padding: 30px; border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; transition: 0.3s; }
-.daysWeek:hover { background: var(--strawberry-pink); transform: translateX(5px); }
-#areaConteudo { flex: 2; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 15px; min-height: 0px; }
-#verHorarios { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
-.slotHora { background: white; padding: 50px; border-radius: 10px; border-left: 5px solid var(--strawberry-pink); cursor: pointer; transition: 0.2s; }
-.slotHora:hover { background: #fff5f5; transform: scale(1.02); }
-#tela-rotina { display: none; width: 100%; min-height: 100vh; background: var(--hk-pink); padding: 20px; position: fixed; top: 0; left: 0; z-index: 1000; }
-.planner-folha { background: white; width: 90%; max-width: 800px; margin: 20px auto; padding: 40px;font-size:30px; border-radius: 30px; box-shadow: 10px 10px 0 var(--hk-red); position: relative; }
-.prioridades-box {  padding: 15px; margin-bottom: 0px; font-size:30px;}
-.prioridades-box input { width: 100%; border: none; border-bottom: 1px dashed var(--hk-red); margin: 5px 0; outline: none; font-size:20px; }
-textarea { width: 100%; height: 400px; border: 1px solid #eee; padding: 10px; resize: none; font-size: 35px; line-height: 2; background: repeating-linear-gradient(white, white 31px, #f0f0f0 32px); }
-.header-weekly { width: 100%; display: flex; justify-content: center; margin-top: -30px; }
-.curved-title { width: 100%; max-width: 600px; overflow: visible; font-family: 'Pacifico', cursive; }
-.curved-title text { font-size: 55px; fill: var(--berry-deep); }
-.btn-home, #btn-voltar, #btn-salvar { background: var(--hk-red); color: white; border: none; padding: 20px; border-radius: 8px; cursor: pointer; font-weight: bold;font-size : 20px; box-shadow: 3px 3px 0 #5e231f; }
-.painel-boas-vindas { position: relative; width: 100%; height: 550px; border-radius: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; grid-column: 1 / -1; }
-.mine-bg { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-.boas-vindas-texto { position: relative; z-index: 2; background: rgba(255,255,255,0.8); padding: 30px; border-radius: 20px; text-align: center; }
-.sticker { position: absolute; pointer-events: none; z-index: 5; filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.1)); }
-.hk-fixa-1 { width: 150px; bottom :10; top: 0;  left: 65px;  }
-.hk-fixa-2 { width: 180px; top: 10px; right: 10px;  }
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body { 
+    background-color: var(--fundo-creme); 
+    font-family: 'DM Sans', sans-serif; 
+    overflow-x: hidden; 
+}
+
+#container-principal { 
+    padding: 40px; 
+    position: relative; 
+    min-height: 100vh; 
+}
+
+.wrapper { 
+    display: flex; 
+    gap: 20px; 
+    position: relative; 
+    z-index: 2; 
+}
+
+.containerPlanner { 
+    width: 200px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.daysWeek { 
+    background: var(--berry-medium); 
+    color: white; 
+    padding: 30px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    text-align: center; 
+    font-weight: bold; 
+    transition: 0.3s; 
+    font-size: 18px;
+}
+
+.daysWeek:hover { 
+    background: var(--strawberry-pink); 
+    transform: translateX(5px); 
+}
+
+#areaConteudo { 
+    flex: 2; 
+    background: rgba(255,255,255,0.2); 
+    padding: 10px; 
+    border-radius: 15px; 
+}
+
+#verHorarios { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 12px; 
+}
+
+.slotHora { 
+    background: white; 
+    padding: 50px; 
+    border-radius: 10px; 
+    border-left:5px solid var(--strawberry-pink); 
+    cursor: pointer; 
+    transition: 0.2s; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:8px;
+    box-shadow: 3px 3px 0 rgba(161, 60, 54, 0.2);
+}
+
+.slotHora:hover { 
+    background: #fff5f5; 
+    transform: scale(1.02); 
+}
+
+#tela-rotina { 
+    display: none; 
+    width: 100%; 
+    min-height: 100vh; 
+    background: var(--hk-pink); 
+    padding: 20px; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 1000; 
+}
+
+.planner-folha { 
+    background: white; 
+    width: 90%; 
+    max-width: 800px; 
+    margin: 20px auto; 
+    padding: 40px; 
+    font-size:30px; 
+    border-radius: 30px; 
+    box-shadow: 10px 10px 0 var(--hk-red); 
+    position: relative; 
+}
+
+.header-rotina {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 20px 30px;
+    border-bottom: 3px solid var(--hk-red);
+    position: relative;
+}
+
+#btn-voltar, .btn-limpar {
+    background: var(--hk-red);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 3px 3px 0 #5e231f;
+}
+
+.btn-limpar {
+    margin-left: auto; /* empurra o botão para o canto superior direito */
+}
+
+/* TÍTULO CURVO – CORRIGIDO (fonte explícita + tamanho ajustado para não cortar letras) */
+.header-weekly { 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    margin-top: -30px; 
+}
+
+.curved-title { 
+    width: 100%; 
+    max-width: 620px; 
+    overflow: visible; 
+}
+
+.curved-title text {
+    font-family: 'Pacifico', cursive;
+    font-size: 48px;     /* reduzido um pouco para caber perfeitamente */
+    fill: var(--berry-deep);
+    letter-spacing: -1px;
+}
+
+/* DATA DA SEMANA – MOVIDA MAIS PARA A ESQUERDA */
+.week-badge {
+    position: absolute;
+    top: 55px;
+    right: 130px;        /* aumentado para mover mais para a esquerda */
+    background: var(--hk-pink);
+    color: var(--berry-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 22px;
+    border-radius: 50px;
+    box-shadow: 4px 4px 0 var(--hk-red);
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* PRIORIDADES – números rosados que NUNCA somem ao digitar (igual código da IA) */
+.prioridades-box {
+    padding: 15px;
+}
+
+.prioridades-box h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: var(--berry-deep);
+}
+
+.prio-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 14px; 
+}
+
+.prio-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.prio-num {
+    width: 32px;
+    height: 32px;
+    background: var(--rose-light);
+    color: var(--hk-red);
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.prio-item input {
+    flex: 1;
+    border: none;
+    border-bottom: 2px dashed var(--hk-red);
+    outline: none;
+    font-size: 22px;
+    padding: 4px 0;
+    background: transparent;
+}
+
+.prio-item input::placeholder {
+    color: #c97b6a;
+}
+
+/* resto do corpo-folha (mantido idêntico) */
+.corpo-folha h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+textarea { 
+    width: 100%; 
+    height: 400px; 
+    border: 1px solid #eee; 
+    padding: 10px; 
+    resize: none; 
+    font-size: 35px; 
+    line-height: 2; 
+    background: repeating-linear-gradient(white, white 31px, #f0f0f0 32px); 
+}
+
+.btn-home, #btn-salvar { 
+    background: var(--hk-red); 
+    color: white; 
+    border: none; 
+    padding: 20px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 20px; 
+    box-shadow: 3px 3px 0 #5e231f; 
+}
+
+.painel-boas-vindas { 
+    position: relative; 
+    width: 100%; 
+    height: 550px; 
+    border-radius: 15px; 
+    overflow: hidden; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    grid-column: 1 / -1; 
+}
+
+.sticker { 
+    position: absolute; 
+    pointer-events: none; 
+    z-index: 5; 
+    filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.1)); 
+}
+
+.hk-fixa-1 { width: 150px; top: 0; left: 65px; }
+.hk-fixa-2 { width: 180px; top: 10px; right: 10px; }
+.hk-fixa-3 { width: 280px; bottom: 10px; right: 10px; }
 .hk-rotina-2 { width: 130px; top: -100px; left: 20px; }
 .hk-rotina-3 { width: 250px; bottom: -40px; right: -60px; transform: rotate(5deg); }
 .hk-rotina-4 { width: 200px; top: -120px; right: -60px; }
-.hk-fixa-3 { width: 280px; bottom: 10px; right: 10px;  }
+
 .itadori-inicio {
-    max-width: 400px; /* Altere esse número para o tamanho que você achar melhor */
-    width: 100%;       /* Faz com que ele tente ocupar quase toda a largura do painel */
-    height: auto;     /* Não deixa a imagem esticada/deformada */
-    z-index: 2;
-    filter: drop-shadow(12px 12px 0px rgba(0,0,0,0.15)); /* Sombra para dar destaque */
+    max-width: 400px;
+    height: auto;
+}
+
+/* TOAST */
+#toast {
+    position: fixed;
+    top: 24px; 
+    left: 50%;
+    transform: translateX(-50%) translateY(-80px);
+    background: var(--hk-red);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 15px; 
+    font-weight: 600;
+    z-index: 9999;
+    transition: transform 0.35s cubic-bezier(.22,1,.36,1), opacity 0.35s;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 4px 4px 0 #5e231f;
+}
+
+#toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* MODAL (igual ao da IA) */
+#modal-overlay {
+    display: none;
+    position: fixed; 
+    inset: 0;
+    background: rgba(109, 50, 42, 0.4);
+    z-index: 99999;
+    align-items: center; 
+    justify-content: center;
+}
+#modal-overlay.open { display: flex; }
+
+#modal-box {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px;
+    max-width: 340px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 10px 10px 0 var(--hk-red);
+}
+#modal-box h3 {
+    font-size: 24px;
+    color: var(--berry-deep);
+    margin-bottom: 10px;
+}
+#modal-box p {
+    font-size: 16px;
+    color: #87564b;
+    margin-bottom: 24px;
+}
+.modal-btns { 
+    display: flex; 
+    gap: 12px; 
+    justify-content: center; 
+}
+.btn-modal-cancel, .btn-modal-confirm {
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-modal-cancel {
+    background: transparent;
+    border: 2px solid var(--hk-red);
+    color: var(--hk-red);
+}
+.btn-modal-confirm {
+    background: var(--hk-red);
+    color: white;
+    border: none;
 }

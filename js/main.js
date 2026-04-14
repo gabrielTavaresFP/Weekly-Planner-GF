@@ -1,6 +1,5 @@
 const areaExibicao = document.getElementById('verHorarios');
 
-// Aqui definimos que o Itadori aparece apenas no Início
 const htmlBoasVindas = `
     <div class="painel-boas-vindas">
         <img src="img/itadori.png" class="itadori-inicio">
@@ -9,23 +8,56 @@ const htmlBoasVindas = `
 
 let diaAtual, horaAtual;
 
-// Função para voltar para a tela inicial (com o Itadori)
+// Data da semana (igual antes)
+const hoje = new Date();
+const inicio = new Date(hoje);
+inicio.setDate(hoje.getDate() - hoje.getDay());
+const fim = new Date(inicio);
+fim.setDate(inicio.getDate() + 6);
+const fmt = d => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+document.getElementById('week-badge').textContent = `${fmt(inicio)} – ${fmt(fim)}`;
+
+// Toast
+function showToast(msg, icon = '🎀') {
+    const t = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    t.querySelector('.toast-icon').textContent = icon;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// Modal
+function fecharModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+}
+function confirmarLimpar() {
+    document.getElementById('modal-overlay').classList.add('open');
+}
+
+// Resetar painel
 function resetarPainel() { 
     areaExibicao.innerHTML = htmlBoasVindas; 
 }
 
+// Clique nos dias
 document.querySelectorAll('.daysWeek').forEach(botao => {
     botao.addEventListener('click', () => {
         const dia = botao.innerText;
-        // Ao clicar no dia, o Itadori some porque mudamos o innerHTML para a grade
         areaExibicao.innerHTML = `<h2 style="grid-column: 1/-1; color: #6D322A; font-family: 'Pacifico', cursive; font-size: 40px; margin-bottom: 20px;">${dia}</h2>`;
         
         for (let h = 5; h <= 22; h++) {
             const horaF = h < 10 ? `0${h}:00` : `${h}:00`;
+            const temDados = !!localStorage.getItem(`${dia}-${horaF}`);
+            
             const card = document.createElement('div');
             card.className = "slotHora";
-            card.style.padding = "40px"; // Deixando os cards de hora grandes também
-            card.innerHTML = `<strong style="font-size: 25px;">${horaF}</strong><p>Planejar</p>`;
+            card.style.padding = "40px";
+            card.innerHTML = `
+                <strong style="font-size: 25px;">${horaF}</strong>
+                <p style="font-size: 22px; font-weight: bold; color: ${temDados ? 'var(--hk-red)' : '#666'}">
+                    ${temDados ? 'EDITADO' : 'Planejar'}
+                </p>
+            `;
             card.onclick = () => abrirRotina(dia, horaF);
             areaExibicao.appendChild(card);
         }
@@ -33,7 +65,8 @@ document.querySelectorAll('.daysWeek').forEach(botao => {
 });
 
 function abrirRotina(dia, horario) {
-    diaAtual = dia; horaAtual = horario;
+    diaAtual = dia; 
+    horaAtual = horario;
     document.getElementById('container-principal').style.display = 'none';
     document.getElementById('tela-rotina').style.display = 'block';
     document.getElementById('hora-selecionada').innerText = `${dia} - ${horario}`;
@@ -56,7 +89,16 @@ function salvarDados() {
         p3: document.getElementById('prio3').value,
         texto: document.getElementById('texto-rotina').value
     }));
-    alert("Rotina Salva! 🎀");
+    showToast('Rotina salva com sucesso! 🎀');
+}
+
+function limparDados() {
+    fecharModal();
+    localStorage.removeItem(`${diaAtual}-${horaAtual}`);
+    ['prio1', 'prio2', 'prio3', 'texto-rotina'].forEach(id => {
+        document.getElementById(id).value = '';
+    });
+    showToast('Rotina apagada.', '🗑️');
 }
 
 function voltarParaPlanner() {
