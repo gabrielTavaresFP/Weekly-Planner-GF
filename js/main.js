@@ -1,4 +1,6 @@
 const areaExibicao = document.getElementById('verHorarios');
+let diaExibidoAtual = null;
+let diaAtual, horaAtual;
 
 const htmlBoasVindas = `
     <div class="painel-boas-vindas">
@@ -6,9 +8,7 @@ const htmlBoasVindas = `
     </div>
 `;
 
-let diaAtual, horaAtual;
-
-// Data da semana (igual antes)
+// Data da semana
 const hoje = new Date();
 const inicio = new Date(hoje);
 inicio.setDate(hoje.getDate() - hoje.getDay());
@@ -34,33 +34,40 @@ function confirmarLimpar() {
     document.getElementById('modal-overlay').classList.add('open');
 }
 
+// Função que recria os cartões do dia
+function mostrarDia(dia) {
+    diaExibidoAtual = dia;
+    areaExibicao.innerHTML = `<h2 style="grid-column: 1/-1; color: #6D322A; font-family: 'Pacifico', cursive; font-size: 40px; margin-bottom: 20px;">${dia}</h2>`;
+    
+    for (let h = 5; h <= 22; h++) {
+        const horaF = h < 10 ? `0${h}:00` : `${h}:00`;
+        const temDados = !!localStorage.getItem(`${dia}-${horaF}`);
+        
+        const card = document.createElement('div');
+        card.className = "slotHora";
+        card.style.padding = "40px";
+        card.innerHTML = `
+            <strong style="font-size: 25px;">${horaF}</strong>
+            <p style="font-size: 22px; font-weight: bold; color: ${temDados ? 'var(--hk-red)' : '#666'}">
+                ${temDados ? 'EDITADO' : 'Planejar'}
+            </p>
+        `;
+        card.onclick = () => abrirRotina(dia, horaF);
+        areaExibicao.appendChild(card);
+    }
+}
+
 // Resetar painel
 function resetarPainel() { 
+    diaExibidoAtual = null;
     areaExibicao.innerHTML = htmlBoasVindas; 
 }
 
-// Clique nos dias
+// Clique nos dias da semana
 document.querySelectorAll('.daysWeek').forEach(botao => {
     botao.addEventListener('click', () => {
         const dia = botao.innerText;
-        areaExibicao.innerHTML = `<h2 style="grid-column: 1/-1; color: #6D322A; font-family: 'Pacifico', cursive; font-size: 40px; margin-bottom: 20px;">${dia}</h2>`;
-        
-        for (let h = 5; h <= 22; h++) {
-            const horaF = h < 10 ? `0${h}:00` : `${h}:00`;
-            const temDados = !!localStorage.getItem(`${dia}-${horaF}`);
-            
-            const card = document.createElement('div');
-            card.className = "slotHora";
-            card.style.padding = "40px";
-            card.innerHTML = `
-                <strong style="font-size: 25px;">${horaF}</strong>
-                <p style="font-size: 22px; font-weight: bold; color: ${temDados ? 'var(--hk-red)' : '#666'}">
-                    ${temDados ? 'EDITADO' : 'Planejar'}
-                </p>
-            `;
-            card.onclick = () => abrirRotina(dia, horaF);
-            areaExibicao.appendChild(card);
-        }
+        mostrarDia(dia);
     });
 });
 
@@ -73,13 +80,11 @@ function abrirRotina(dia, horario) {
     
     ['prio1', 'prio2', 'prio3', 'texto-rotina'].forEach(id => document.getElementById(id).value = "");
     
-    const dados = JSON.parse(localStorage.getItem(`${dia}-${horario}`));
-    if (dados) {
-        document.getElementById('prio1').value = dados.p1 || "";
-        document.getElementById('prio2').value = dados.p2 || "";
-        document.getElementById('prio3').value = dados.p3 || "";
-        document.getElementById('texto-rotina').value = dados.texto || "";
-    }
+    const dados = JSON.parse(localStorage.getItem(`${dia}-${horario}`) || '{}');
+    document.getElementById('prio1').value = dados.p1 || "";
+    document.getElementById('prio2').value = dados.p2 || "";
+    document.getElementById('prio3').value = dados.p3 || "";
+    document.getElementById('texto-rotina').value = dados.texto || "";
 }
 
 function salvarDados() {
@@ -104,4 +109,10 @@ function limparDados() {
 function voltarParaPlanner() {
     document.getElementById('container-principal').style.display = 'block';
     document.getElementById('tela-rotina').style.display = 'none';
+    
+    if (diaExibidoAtual) {
+        mostrarDia(diaExibidoAtual);
+    }
 }
+
+console.log('%c🎀 Planner da sua esposa carregado com sucesso!', 'color:#A13C36; font-size:18px; font-family:Pacifico');

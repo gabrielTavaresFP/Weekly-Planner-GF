@@ -5,14 +5,10 @@
     --strawberry-pink: #CFA195; 
     --hk-pink: #F4C7D0; 
     --hk-red: #A13C36;
-    --rose-light: #E8B5A8;   /* cor rosada usada nos números das prioridades */
+    --rose-light: #E8B5A8;
 }
 
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body { 
     background-color: var(--fundo-creme); 
@@ -74,14 +70,14 @@ body {
     background: white; 
     padding: 50px; 
     border-radius: 10px; 
-    border-left:5px solid var(--strawberry-pink); 
+    border-left: 5px solid var(--strawberry-pink); 
     cursor: pointer; 
     transition: 0.2s; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap:8px;
+    gap: 8px;
     box-shadow: 3px 3px 0 rgba(161, 60, 54, 0.2);
 }
 
@@ -108,7 +104,7 @@ body {
     max-width: 800px; 
     margin: 20px auto; 
     padding: 40px; 
-    font-size:30px; 
+    font-size: 30px; 
     border-radius: 30px; 
     box-shadow: 10px 10px 0 var(--hk-red); 
     position: relative; 
@@ -136,11 +132,8 @@ body {
     box-shadow: 3px 3px 0 #5e231f;
 }
 
-.btn-limpar {
-    margin-left: auto; /* empurra o botão para o canto superior direito */
-}
+.btn-limpar { margin-left: auto; }
 
-/* TÍTULO CURVO – CORRIGIDO (fonte explícita + tamanho ajustado para não cortar letras) */
 .header-weekly { 
     width: 100%; 
     display: flex; 
@@ -156,16 +149,15 @@ body {
 
 .curved-title text {
     font-family: 'Pacifico', cursive;
-    font-size: 48px;     /* reduzido um pouco para caber perfeitamente */
+    font-size: 48px;
     fill: var(--berry-deep);
     letter-spacing: -1px;
 }
 
-/* DATA DA SEMANA – MOVIDA MAIS PARA A ESQUERDA */
 .week-badge {
     position: absolute;
     top: 55px;
-    right: 130px;        /* aumentado para mover mais para a esquerda */
+    right: 130px;
     background: var(--hk-pink);
     color: var(--berry-deep);
     font-family: 'DM Sans', sans-serif;
@@ -178,11 +170,7 @@ body {
     z-index: 10;
 }
 
-/* PRIORIDADES – números rosados que NUNCA somem ao digitar (igual código da IA) */
-.prioridades-box {
-    padding: 15px;
-}
-
+.prioridades-box { padding: 15px; }
 .prioridades-box h3 {
     font-size: 28px;
     margin-bottom: 15px;
@@ -225,15 +213,9 @@ body {
     background: transparent;
 }
 
-.prio-item input::placeholder {
-    color: #c97b6a;
-}
+.prio-item input::placeholder { color: #c97b6a; }
 
-/* resto do corpo-folha (mantido idêntico) */
-.corpo-folha h3 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
+.corpo-folha h3 { font-size: 28px; margin-bottom: 10px; }
 
 textarea { 
     width: 100%; 
@@ -284,12 +266,8 @@ textarea {
 .hk-rotina-3 { width: 250px; bottom: -40px; right: -60px; transform: rotate(5deg); }
 .hk-rotina-4 { width: 200px; top: -120px; right: -60px; }
 
-.itadori-inicio {
-    max-width: 400px;
-    height: auto;
-}
+.itadori-inicio { max-width: 400px; height: auto; }
 
-/* TOAST */
 #toast {
     position: fixed;
     top: 24px; 
@@ -316,7 +294,6 @@ textarea {
     opacity: 1;
 }
 
-/* MODAL (igual ao da IA) */
 #modal-overlay {
     display: none;
     position: fixed; 
@@ -337,21 +314,10 @@ textarea {
     text-align: center;
     box-shadow: 10px 10px 0 var(--hk-red);
 }
-#modal-box h3 {
-    font-size: 24px;
-    color: var(--berry-deep);
-    margin-bottom: 10px;
-}
-#modal-box p {
-    font-size: 16px;
-    color: #87564b;
-    margin-bottom: 24px;
-}
-.modal-btns { 
-    display: flex; 
-    gap: 12px; 
-    justify-content: center; 
-}
+#modal-box h3 { font-size: 24px; color: var(--berry-deep); margin-bottom: 10px; }
+#modal-box p { font-size: 16px; color: #87564b; margin-bottom: 24px; }
+
+.modal-btns { display: flex; gap: 12px; justify-content: center; }
 .btn-modal-cancel, .btn-modal-confirm {
     padding: 12px 28px;
     border-radius: 50px;

@@ -21,7 +21,6 @@
             </svg>
         </div>
 
-        <!-- Data da semana (movida mais para a esquerda para não ficar em cima da imagem) -->
         <div class="week-badge" id="week-badge"></div>
 
         <div class="wrapper">
@@ -46,12 +45,10 @@
         </div>
     </div> 
 
-    <div id="tela-rotina" style="display: none;">
+    <div id="tela-rotina">
         <div class="header-rotina">
             <button onclick="voltarParaPlanner()" id="btn-voltar">← Voltar</button>
             <h2 id="hora-selecionada">08:00</h2>
-            
-            <!-- NOVO BOTÃO LIMPAR (exatamente como no código da IA, com mesma estilização) -->
             <button onclick="confirmarLimpar()" class="btn-limpar">Limpar</button>
         </div>
         <div class="planner-folha">
@@ -91,7 +88,7 @@
         <span id="toast-msg">Salvo!</span>
     </div>
 
-    <!-- MODAL CONFIRMAR LIMPAR (mesma mensagem e estilização da IA) -->
+    <!-- MODAL -->
     <div id="modal-overlay">
         <div id="modal-box">
             <h3>Limpar rotina?</h3>
